@@ -12,7 +12,8 @@
   :components ((:file "package")
                (:file "dcons")
 	       (:file "dlist")
-	       (:file "modification")))
+	       (:file "modification")
+	       (:file "mapping")))
 
 (defsystem #:dlist-test
   :depends-on (:dlist :lisp-unit)

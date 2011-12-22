@@ -15,4 +15,9 @@
    #:dlist->list
    #:dlist-append
    #:dlist-push
+   #:dlist-pop
+   #:mapdlist
+   #:mapdcons
+   #:dodlist
+   #:dodcons
    ))
