@@ -9,7 +9,10 @@
    #:prev
    #:data
    #:dlist=
+   #:dlist-length
+   #:nthdcons
+   #:dlist-nth
    #:dlist->list
-;;   #:dlist-cons-on
-;;   #:dcons-append
+   #:dlist-append
+   #:dlist-push
    ))

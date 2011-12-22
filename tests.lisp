@@ -41,6 +41,40 @@
   (assert-equal '(1 2 3) (dlist->list (dlist 1 2 3)))
   (assert-equality #'dlist= (dlist 1 2 3) (apply #'dlist '(1 2 3))))
 
+(define-test append
+  (assert-equality #'dlist= (dlist 1 2 3 4 5 6) (dlist-append (dlist 1 2 3) (dlist 4 5 6)))
+  (assert-equality #'dlist= (dlist 1 2 3 #\a #\b #\c) (dlist-append (dlist 1 2 3) (dlist #\a #\b #\c)))
+  (assert-equal (dlist-append) nil)
+  (assert-equality #'dlist= (dlist-append (dlist 1 2 3)) (dlist 1 2 3))
+  (assert-equality #'dlist= (dlist 1 2 3 4 5 6) (dlist-append (dlist 1 2) (dlist 3 4) (dlist 5 6))))
+
+(define-test length
+  (assert-equal 0 (dlist-length nil))
+  (assert-equal 1 (dlist-length (dlist 1)))
+  (assert-equal 2 (dlist-length (dlist 1 2))))
+
+(define-test nth
+  (let ((dlist (dlist 1 2 3 4)))
+    (assert-equal 1 (dlist-nth 0 dlist))
+    (assert-equal 3 (dlist-nth 2 dlist))
+    (assert-equal '(nil nil) (multiple-value-list (dlist-nth 3 nil)))
+    (assert-equal '(nil nil) (multiple-value-list (dlist-nth 7 dlist)))
+    (assert-equal (dlist-first dlist) (nthdcons 0 dlist))
+    (assert-equal (next (next (dlist-first dlist))) (nthdcons 2 dlist))
+    (assert-equal nil (nthdcons 4 dlist))
+    (setf (dlist-nth 1 dlist) 5)
+    (assert-equal 5 (data (next (dlist-first dlist))))
+    (assert-equal 5 (dlist-nth 1 dlist))))
+
+(define-test push-pop
+  (let ((dlist (dlist 1 2 3)))
+    (dlist-push 0 dlist)
+    (dlist-push 4 dlist :at-end t)
+    (assert-equality #'dlist= dlist (dlist 0 1 2 3 4))
+    (assert-equal 0 (dlist-pop dlist))
+    (assert-equal 4 (dlist-pop dlist :from-end t))
+    (assert-equality #'dlist= (dlist 1 2 3) dlist)))
+
 ;;Compatibility magic so we can reference lisp-unit macros to run tests
 (defun %run-tests ()
   (lisp-unit:run-all-tests :dlist))
