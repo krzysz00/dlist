@@ -9,6 +9,8 @@
    #:prev
    #:data
    #:dlist=
+   #:dconsp
+   #:dlistp
    #:dlist-length
    #:nthdcons
    #:dlist-nth
@@ -18,6 +20,9 @@
    #:dlist-pop
    #:mapdlist
    #:mapdcons
+   #:mapdcon
+   #:dlist-reverse
    #:dodlist
    #:dodcons
+   #:copy-dlist
    ))

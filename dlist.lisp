@@ -39,13 +39,16 @@
 (defun dlist (&rest elements)
   "Returns a doubly-linked list (dlist) with the elements in `elements'"
   (when elements
-    (let ((dlist (make-dlist)) (current-dcons nil))
-      (setf (dlist-first dlist) (dcons nil (first elements) nil))
-      (setf current-dcons (dlist-first dlist))
-      (loop for i on (rest elements) do
-	   (setf current-dcons (next (dcons-append (car i) current-dcons)))
-	   (or (cdr i) (setf (dlist-last dlist) current-dcons)))
-      dlist)))
+    (if (= (length elements) 1)
+	(let* ((dcons (dcons nil (car elements) nil)) (dlist (make-dlist :first dcons :last dcons)))
+	  dlist)
+	(let ((dlist (make-dlist)) (current-dcons nil))
+	  (setf (dlist-first dlist) (dcons nil (first elements) nil))
+	  (setf current-dcons (dlist-first dlist))
+	  (loop for i on (rest elements) do
+	       (setf current-dcons (next (dcons-append (car i) current-dcons)))
+	       (or (cdr i) (setf (dlist-last dlist) current-dcons)))
+	  dlist))))
 
 (defun dlist= (dlist &rest more-dlists)
   "Tests dlists for equality by element, recursively descending into sub-dlists."
@@ -59,6 +62,10 @@
 	   (if (and (typep (data i) 'dlist) (typep (data j) 'dlist))
 	       (dlist= (data i) (data j))
 	       (equal (data i) (data j))))))
+
+(defun dlistp (object)
+  "Tests if `object' is a dlist."
+  (typep object 'dlist))
 
 (defun dlist->list (dlist)
   "Converts a dlist to a list"
@@ -81,3 +88,4 @@
 
 (defun (setf dlist-nth) (val n dlist)
   (setf (data (nthdcons n dlist)) val))
+

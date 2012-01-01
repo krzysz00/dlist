@@ -10,25 +10,37 @@
 
 (defmacro dlist-push (obj dlist &key at-end)
   "Pushes `obj' onto `dlist'. If `at-end' is not-nil, the element is added to the end of dlist, otherwise it is added to the begining."
-  (let ((obj-var (gensym)) (dlist-var (gensym)) (dlist-part-var (gensym)) (at-end-p at-end))
-    (if at-end-p
-	`(let* ((,obj-var ,obj) (,dlist-var ,dlist) (,dlist-part-var (dlist-last ,dlist-var)))
-	   (setf (next ,dlist-part-var) (dcons ,dlist-part-var ,obj-var nil))
-	   (setf (dlist-last ,dlist-var) (next ,dlist-part-var)) ,dlist-var)
-	`(let* ((,obj-var ,obj) (,dlist-var ,dlist) (,dlist-part-var (dlist-first ,dlist-var)))
-	   (setf (prev ,dlist-part-var) (dcons nil ,obj-var ,dlist-part-var))
-	   (setf (dlist-first ,dlist-var) (prev ,dlist-part-var)) ,dlist-var))))
+  (let ((obj-var (gensym)) (dlist-var (gensym)) (dlist-part-var (gensym)) (at-end-var (gensym)))
+    `(let ((,at-end-var ,at-end) (,obj-var ,obj) (,dlist-var ,dlist))
+       (if ,at-end-var
+	   (if ,dlist-var
+	       (let ((,dlist-part-var (dlist-last ,dlist-var)))
+		 (setf (next ,dlist-part-var) (dcons ,dlist-part-var ,obj-var nil))
+		 (setf (dlist-last ,dlist-var) (next ,dlist-part-var)) ,dlist-var)
+	       (setf ,dlist (dlist ,obj-var)))
+	   (if ,dlist-var
+	       (let ((,dlist-part-var (dlist-first ,dlist-var)))
+		 (setf (prev ,dlist-part-var) (dcons nil ,obj-var ,dlist-part-var))
+		 (setf (dlist-first ,dlist-var) (prev ,dlist-part-var)) ,dlist-var)
+	       (setf ,dlist (dlist ,obj-var)))))))
 
 (defmacro dlist-pop (dlist &key from-end)
   "Pops an element from dlist and returns it. If `from-end' is non-`nil', the element will be popped from the end of the dlist. Otherwise, it will be popped from the begining."
-  (let ((dlist-var (gensym)) (dlist-part-var (gensym)) (at-end-p from-end))
-    (if at-end-p
-	`(let* ((,dlist-var ,dlist) (,dlist-part-var (dlist-last ,dlist)))
-	   (setf (dlist-last ,dlist-var) (prev ,dlist-part-var))
-	   (setf (next (dlist-last ,dlist)) nil)
-	   (data ,dlist-part-var))
-	`(let* ((,dlist-var ,dlist) (,dlist-part-var (dlist-first ,dlist)))
-	   (setf (dlist-first ,dlist-var) (next ,dlist-part-var))
-	   (setf (prev (dlist-first ,dlist)) nil)
-	   (data ,dlist-part-var)))))
+  (let ((dlist-var (gensym)) (dlist-part-var (gensym)) (at-end-var (gensym)))
+    `(let ((,at-end-var ,from-end))
+       (if ,at-end-var
+	   (let* ((,dlist-var ,dlist) (,dlist-part-var (dlist-last ,dlist)))
+	     (if (and (not (prev ,dlist-part-var)) (not (next ,dlist-part-var)))
+		 (setf ,dlist nil)
+		 (progn
+		   (setf (dlist-last ,dlist-var) (prev ,dlist-part-var))
+		   (setf (next (dlist-last ,dlist)) nil)))
+	     (data ,dlist-part-var))
+	   (let* ((,dlist-var ,dlist) (,dlist-part-var (dlist-first ,dlist)))
+	     (if (and (not (prev ,dlist-part-var)) (not (next ,dlist-part-var)))
+		 (setf ,dlist nil)
+		 (progn
+		   (setf (dlist-first ,dlist-var) (next ,dlist-part-var))
+		   (setf (prev (dlist-first ,dlist)) nil)))
+	     (data ,dlist-part-var))))))
 

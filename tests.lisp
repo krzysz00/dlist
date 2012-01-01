@@ -73,7 +73,20 @@
     (assert-equality #'dlist= dlist (dlist 0 1 2 3 4))
     (assert-equal 0 (dlist-pop dlist))
     (assert-equal 4 (dlist-pop dlist :from-end t))
-    (assert-equality #'dlist= (dlist 1 2 3) dlist)))
+    (assert-equality #'dlist= (dlist 1 2 3) dlist)
+    (setf dlist nil)
+    (dlist-push 1 dlist)
+    (dlist-push 2 dlist)
+    (dlist-push 3 dlist)
+    (assert-equality #'dlist= (dlist 3 2 1) dlist)
+    (loop repeat 3 do (dlist-pop dlist :from-end t))
+    (assert-equal nil dlist)))
+
+;; (define-test do-macros
+;;     (let ((dlist (dlist 1 2 3))
+;; 	  (ret nil))
+;;       (dodcons (i dlist)
+;; 	(push (data i) ret))
 
 ;;Compatibility magic so we can reference lisp-unit macros to run tests
 (defun %run-tests ()

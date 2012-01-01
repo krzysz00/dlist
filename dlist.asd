@@ -13,7 +13,9 @@
                (:file "dcons")
 	       (:file "dlist")
 	       (:file "modification")
-	       (:file "mapping")))
+	       (:file "mapping")
+	       (:file "more-ops")
+	       (:file "generic-sequences"))
 
 (defsystem #:dlist-test
   :depends-on (:dlist :lisp-unit)
