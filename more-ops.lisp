@@ -9,5 +9,16 @@
   (mapdlist #'(lambda (x) (cond 
 			    ((and deep-copy (or (dlistp x) (dconsp x))) (copy-dlist x))
 			    ((and deep-copy (typep x 'sequence)) (copy-seq x))
-			    (t x)))))
+			    (t x))) dlist))
 
+(defun make-dlist (size &key initial-element)
+  "Creates a dlist that contains `initial-element' `size' times."
+  (let ((ret nil))
+    (loop repeat size do (dlist-push initial-element ret)) ret))
+
+(defun dlist-length (dlist)
+  "Returns the length of `dlist'"
+  (let ((ret 0))
+    (dodlist (i dlist ret)
+      (declare (ignore i))
+      (incf ret))))

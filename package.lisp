@@ -5,6 +5,7 @@
    #:dlist
    #:dlist-first
    #:dlist-last
+   #:make-dlist
    #:next
    #:prev
    #:data
@@ -26,3 +27,6 @@
    #:dodcons
    #:copy-dlist
    ))
+
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (when (find-package :sequence) (pushnew :generic-sequences *features*)))

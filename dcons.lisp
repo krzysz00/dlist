@@ -36,4 +36,3 @@
 (defun dconsp (object)
   "Returns T if `object' is a dcons"
   (typep object 'dcons))
-
