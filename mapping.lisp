@@ -4,13 +4,10 @@
   "Loops over the dconses in `dlist', binding `var' to each in turn. If `from-end' is non-nil, the loop proceeds from the last element of ther list to the first. This is basically `dolist' for dlists."
   (let ((dlist-var (gensym)) (from-end-var (gensym)))
     `(let* ((,dlist-var ,dlist) (,from-end-var ,from-end))
-       (if ,from-end-var
-	   (do ((,var (dlist-last ,dlist-var) (prev ,var)))
-	       ((eql ,var nil) ,result-form)
-	     ,@body)
-	   (do ((,var (dlist-first ,dlist-var) (next ,var)))
-	       ((eql ,var nil) ,result-form)
-	     ,@body)))))
+       (do ((,var (funcall (if ,from-end-var #'dlist-last #'dlist-first) ,dlist-var) 
+		  (funcall (if ,from-end-var #'prev #'next) ,var)))
+	   ((eql ,var nil) ,result-form)
+	 ,@body))))
 
 (defmacro dodlist ((var dlist &optional result-form from-end) &body body)
   "Loops over the elements in `dlist', binding each to `var' in turn, then executing `body'. If `from-end' is non-nil, the loop proceeds from the end of the list to the begining."

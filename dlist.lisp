@@ -72,25 +72,25 @@
   "Converts a dlist to a list"
   (loop for i = (dlist-first dlist) then (next i) while i collect (data i)))
 
-(defun nthdcons (n dlist)
-  "Returns the nth dcons in `dlist' (zero-based). If n is >= the length of the list, returns NIL."
-  (let ((val (dlist-first dlist)))
+(defun nthdcons (n dlist &key from-end)
+  "Returns the @code{n}th dcons in `dlist' (zero-based). If n is >= the length of the list, returns NIL. If `from-end' is true, returns the @code{n}th dcons from the end."
+  (let ((val (funcall (if from-end #'dlist-last #'dlist-first) dlist)))
     (dotimes (i n val)
-      (setf val (next val)))))
+      (setf val (if from-end (prev val) (next val))))))
 
-(defun dlist-nth (n dlist)
-  "Returns the nth element of `dlist', as the primary value. If n is >= the length of the list, NIL will be returned. The secondary value will be T if the value was actually found in the list, and NIL otherwise."
-  (let ((ret (nthdcons n dlist)))
+(defun dlist-nth (n dlist &key from-end)
+  "Returns the nth element of `dlist', as the primary value. If n is >= the length of the list, NIL will be returned. The secondary value will be T if the value was actually found in the list, and NIL otherwise. If `from-end' is true, `dlist-nth' returns the @code{n}th element from the end, subject to the rules above."
+  (let ((ret (nthdcons n dlist :from-end from-end)))
     (values (data ret) (not (not ret)))))
 
-(defun (setf dlist-nth) (val n dlist)
-  "Sets the data of the nth dcons in `dlist' to `val'"
-  (setf (data (nthdcons n dlist)) val))
+(defun (setf dlist-nth) (val n dlist &key from-end)
+  "Sets the data of the nth dcons in `dlist' to `val'. If `from-end' is true, sets the @code{n}th element from the end."
+  (setf (data (nthdcons n dlist :from-end from-end)) val))
 
 (defmethod print-object ((object dlist) stream)
   (print-unreadable-object (object stream :type t)
-    (print (dlist->list object) stream)))
+    (format stream "~s" (dlist->list object))))
 
 (defmethod describe-object ((dlist dlist) stream)
   (let ((*print-circle* t))
-    (format stream "~&~S is a doubly-linked list (dlist) which has the elements ~S.~% Its first dcons is ~S, and its last dcons is ~S." dlist (dlist->list dlist) (dlist-first dlist) (dlist-last dlist))))
+    (format stream "~&~S is a doubly-linked list (dlist) which has the elements ~%~S.~% Its first dcons is: ~%~S~%. Its last dcons is ~%~S~%" dlist (dlist->list dlist) (dlist-first dlist) (dlist-last dlist))))

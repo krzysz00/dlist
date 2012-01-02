@@ -41,18 +41,19 @@
 
 (define-test make-dlist
   (assert-equality #'dlist= (dlist nil nil nil nil) (make-dlist 4))
-  (assert-true (every #'eql (dlist->list (make-dlist 5 :initial-element "foobar")))))
+  (assert-equality #'dlist= (dlist 2 2 2 2) (make-dlist 4 :initial-element 2)))
 
 (define-test conversion
   (assert-equal '(1 2 3) (dlist->list (dlist 1 2 3)))
   (assert-equality #'dlist= (dlist 1 2 3) (apply #'dlist '(1 2 3))))
 
 (define-test append
-  (assert-equality #'dlist= (dlist 1 2 3 4 5 6) (dlist-append (dlist 1 2 3) (dlist 4 5 6)))
-  (assert-equality #'dlist= (dlist 1 2 3 #\a #\b #\c) (dlist-append (dlist 1 2 3) (dlist #\a #\b #\c)))
-  (assert-equal (dlist-append) nil)
-  (assert-equality #'dlist= (dlist-append (dlist 1 2 3)) (dlist 1 2 3))
-  (assert-equality #'dlist= (dlist 1 2 3 4 5 6) (dlist-append (dlist 1 2) (dlist 3 4) (dlist 5 6))))
+  (loop for f in (list #'dlist-nconc #'dlist-append) do
+       (assert-equality #'dlist= (dlist 1 2 3 4 5 6) (funcall f (dlist 1 2 3) (dlist 4 5 6)))
+       (assert-equality #'dlist= (dlist 1 2 3 #\a #\b #\c) (funcall f (dlist 1 2 3) (dlist #\a #\b #\c)))
+       (assert-equal (funcall f) nil)
+       (assert-equality #'dlist= (funcall f (dlist 1 2 3)) (dlist 1 2 3))
+       (assert-equality #'dlist= (dlist 1 2 3 4 5 6) (funcall f (dlist 1 2) (dlist 3 4) (dlist 5 6)))))
 
 (define-test length
   (assert-equal 0 (dlist-length nil))
@@ -63,6 +64,7 @@
   (let ((dlist (dlist 1 2 3 4)))
     (assert-equal 1 (dlist-nth 0 dlist))
     (assert-equal 3 (dlist-nth 2 dlist))
+    (assert-equal 4 (dlist-nth 0 dlist :from-end t))
     (assert-equal '(nil nil) (multiple-value-list (dlist-nth 3 nil)))
     (assert-equal '(nil nil) (multiple-value-list (dlist-nth 7 dlist)))
     (assert-equal (dlist-first dlist) (nthdcons 0 dlist))
@@ -112,6 +114,38 @@
     (assert-equal 0 (my-position 1 (dlist 1 2 3)))
     (assert-equal 2 (my-position 3 (dlist 1 2 3)))
     (assert-equal nil (my-position 4 (dlist 1 2 3)))))
+
+(define-test reverse
+  (assert-equality #'dlist= (dlist 3 2 1) (dlist-reverse (dlist 1 2 3))))
+
+(define-test copy-dlist
+  (let ((dlist (dlist 1 2 3)))
+    (assert-false (eql dlist (copy-dlist dlist)))))
+
+#+generic-sequences
+(define-test generic-seqs
+  (assert-equality 
+   #'dlist=
+   (dlist 1 2 3 4 5 5 5 5)
+   (nsubstitute 5 4 (dlist 1 2 3 4 5 4 5 4) :count 2 :from-end t))
+  (assert-equality
+   #'dlist=
+   (dlist 1 2 3 5 5 5 5 4)
+   (substitute 5 4 (dlist 1 2 3 4 5 4 5 4) :count 2))
+  (assert-equal 3 (elt (dlist 1 2 3 4) 2))
+  (assert-equal '(1 2 3) (coerce (dlist 1 2 3) 'list))
+  (assert-equality #'dlist= (dlist 1 2 3) (coerce #(1 2 3) 'dlist))
+  (assert-equality #'dlist= (dlist 1 2 3 4) (sequence:adjust-sequence (dlist 1 2 3 4 5) 4))
+  (assert-equality #'dlist= (dlist 1 2 3 4 5 nil) 
+		   (sequence:adjust-sequence (dlist 1 2 3 4 5) 6 :initial-element nil))
+  (assert-equality #'dlist= (dlist 6 7 8 4)
+		   (sequence:adjust-sequence (dlist 1 2 3 4) 4 :initial-contents '(6 7 8)))
+  (assert-equality #'dlist= (dlist nil nil) (sequence:make-sequence-like (dlist 1 2 3) 2))
+  (assert-equal "def" (map 'string #'code-char (dlist 100 101 102)))
+  (assert-equality #'dlist= (dlist 3 4) 
+		   (sequence:make-sequence-like (dlist 1 2 3 4) 2 :initial-contents '(3 4)))
+  (assert-equality #'dlist= (dlist 5 5 5) (sequence:make-sequence-like (dlist 1) 3 :initial-element 5))
+  (assert-equality #'dlist= (dlist 1 2 3) (delete-duplicates (dlist 1 1 2 2 3))))
 
 ;;Compatibility magic so we can reference lisp-unit macros to run tests
 (defun %run-tests ()

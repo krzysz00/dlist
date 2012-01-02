@@ -22,3 +22,7 @@
     (dodlist (i dlist ret)
       (declare (ignore i))
       (incf ret))))
+
+(defun dlist-append (&rest dlists)
+  "Appends `dlists' non-derstructively by calling `dlist-nconc' with shallow copies of each dlist."
+  (apply #'dlist-nconc (mapcar #'copy-dlist dlists))) 

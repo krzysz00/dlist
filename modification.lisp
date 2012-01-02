@@ -1,8 +1,8 @@
 (in-package #:dlist)
 
-(defun dlist-append (&rest dlists)
-  "Appends `dlists'. This works like `append' for singly-linked lists, except it is destructive and the resuld will share structure with the input dlists."
-  (unless dlists (return-from dlist-append dlists))
+(defun dlist-nconc (&rest dlists)
+  "Appends `dlists'. This works like `nconc' for singly-linked lists, except it is destructive and the resuld will share structure with the input dlists. This function should have running time proportional to the number of lists being appended."
+  (unless dlists (return-from dlist-nconc dlists))
   (reduce #'(lambda (dlist1 dlist2)
 	      (setf (next (dlist-last dlist1)) (dlist-first dlist2)
 		    (prev (dlist-first dlist2)) (dlist-last dlist1)

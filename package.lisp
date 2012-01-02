@@ -17,6 +17,7 @@
    #:dlist-nth
    #:dlist->list
    #:dlist-append
+   #:dlist-nconc
    #:dlist-push
    #:dlist-pop
    #:mapdlist
