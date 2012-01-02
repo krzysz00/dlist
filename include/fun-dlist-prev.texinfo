@@ -1,0 +1,5 @@
+@findex prev
+@anchor{Function prev}
+@deffn {Function} {prev} dcons
+Accesses the `prev' slot of a dcons. The `prev' of nil is nil.
+@end deffn

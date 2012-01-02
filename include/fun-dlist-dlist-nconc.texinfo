@@ -1,0 +1,5 @@
+@findex dlist-nconc
+@anchor{Function dlist-nconc}
+@deffn {Function} {dlist-nconc} @&rest dlists
+Appends `dlists'. This works like `nconc' for singly-linked lists, except it is destructive and the resuld will share structure with the input dlists. This function should have running time proportional to the number of lists being appended.
+@end deffn

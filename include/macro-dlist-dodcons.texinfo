@@ -1,0 +1,5 @@
+@findex dodcons
+@anchor{Macro dodcons}
+@deffn {Macro} {dodcons} (var dlist &optional result-form from-end) @&body body
+Loops over the dconses in `dlist', binding `var' to each in turn. If `from-end' is non-nil, the loop proceeds from the last element of ther list to the first. This is basically `dolist' for dlists.
+@end deffn

@@ -1,0 +1,5 @@
+@findex @setf{dlist-nth}
+@anchor{Function (setf dlist-nth)}
+@deffn {Function} {@setf{dlist-nth}} val n dlist @&key from-end
+Sets the data of the nth dcons in `dlist' to `val'. If `from-end' is true, sets the @@code@{n@}th element from the end.
+@end deffn

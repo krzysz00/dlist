@@ -1,0 +1,5 @@
+@findex @setf{next}
+@anchor{Function (setf next)}
+@deffn {Function} {@setf{next}} val place
+Sets the `next' slot of `place' (which must be a `dcons') to `val'
+@end deffn

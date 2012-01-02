@@ -1,0 +1,5 @@
+@findex data
+@anchor{Function data}
+@deffn {Function} {data} dcons
+Accesses the `data' slot of a dcons. The `data' of nil is nil.
+@end deffn

@@ -1,0 +1,5 @@
+@findex dlist-reverse
+@anchor{Function dlist-reverse}
+@deffn {Function} {dlist-reverse} dlist
+Reverses dlist non-destructively.
+@end deffn

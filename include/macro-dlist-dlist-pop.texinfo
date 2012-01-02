@@ -1,0 +1,5 @@
+@findex dlist-pop
+@anchor{Macro dlist-pop}
+@deffn {Macro} {dlist-pop} dlist @&key from-end
+Pops an element from dlist and returns it. If `from-end' is non-`nil', the element will be popped from the end of the dlist. Otherwise, it will be popped from the begining.
+@end deffn

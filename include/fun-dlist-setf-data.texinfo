@@ -1,0 +1,5 @@
+@findex @setf{data}
+@anchor{Function (setf data)}
+@deffn {Function} {@setf{data}} val place
+Sets the `data' slot of `place' (which must be a `dcons') to `val'
+@end deffn

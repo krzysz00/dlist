@@ -39,8 +39,7 @@
 	       (:file "modification")
 	       (:file "mapping")
 	       (:file "more-ops")
-	       (:file "generic-sequences")
-	       (:file "iterate")))
+	       (:file "generic-sequences")))
 
 (defsystem #:dlist-test
   :depends-on (:dlist :lisp-unit)

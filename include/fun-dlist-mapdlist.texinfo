@@ -1,0 +1,5 @@
+@findex mapdlist
+@anchor{Function mapdlist}
+@deffn {Function} {mapdlist} function dlist @&rest more-dlists-and-from-end
+Behaves like `mapdcons', except the function will be passed the `data' of each dcons.
+@end deffn

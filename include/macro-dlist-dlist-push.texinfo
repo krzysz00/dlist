@@ -1,0 +1,5 @@
+@findex dlist-push
+@anchor{Macro dlist-push}
+@deffn {Macro} {dlist-push} obj dlist @&key at-end
+Pushes `obj' onto `dlist'. If `at-end' is not-nil, the element is added to the end of dlist, otherwise it is added to the begining.
+@end deffn

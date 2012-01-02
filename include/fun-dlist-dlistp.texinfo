@@ -1,0 +1,5 @@
+@findex dlistp
+@anchor{Function dlistp}
+@deffn {Function} {dlistp} object
+Tests if `object' is a dlist.
+@end deffn

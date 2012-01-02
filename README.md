@@ -30,3 +30,5 @@ Contact Information
 You can reach the author (Krzysztof Drewniak) at
 <krzysdrewniak@gmail.com>. If you find any bugs, please report them at
 dlist's GitHub issue tracker. 
+
+[1]: http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.65.1604&rep=rep1&type=pdf

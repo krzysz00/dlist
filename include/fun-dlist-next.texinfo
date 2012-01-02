@@ -1,0 +1,5 @@
+@findex next
+@anchor{Function next}
+@deffn {Function} {next} dcons
+Accesses the `next' slot of a dcons. The `next' of nil is nil.
+@end deffn

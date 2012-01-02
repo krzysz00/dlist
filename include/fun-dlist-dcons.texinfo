@@ -1,0 +1,5 @@
+@findex dcons
+@anchor{Function dcons}
+@deffn {Function} {dcons} prev data next
+Constructs a `dcons' with the given `prev', `data', and `next'
+@end deffn

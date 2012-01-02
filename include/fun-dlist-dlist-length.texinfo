@@ -1,0 +1,5 @@
+@findex dlist-length
+@anchor{Function dlist-length}
+@deffn {Function} {dlist-length} dlist
+Returns the length of `dlist'
+@end deffn

@@ -1,0 +1,7 @@
+@tindex dlist
+@anchor{Class dlist}
+@deftp {Class} {dlist}
+Class precedence list: @code{@lw{dlist}, @lw{sequence}, @lw{standard-object}, @lw{t}}
+
+A class that represents a doubly-linked list
+@end deftp

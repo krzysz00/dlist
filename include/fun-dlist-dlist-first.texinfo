@@ -1,0 +1,5 @@
+@findex dlist-first
+@anchor{Function dlist-first}
+@deffn {Function} {dlist-first} dlist
+Gets the first `dcons' in a `dlist'
+@end deffn

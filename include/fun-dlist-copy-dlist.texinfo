@@ -1,0 +1,5 @@
+@findex copy-dlist
+@anchor{Function copy-dlist}
+@deffn {Function} {copy-dlist} dlist @&key deep-copy
+Copies `dlist', returning a new dlist with the same elements as `dlist'. If `deep-copy' is true, `copy-dlist' deep-copies dlists and sequences.
+@end deffn

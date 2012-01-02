@@ -1,0 +1,5 @@
+@findex dconsp
+@anchor{Function dconsp}
+@deffn {Function} {dconsp} object
+Returns @code{t} if `object' is a dcons
+@end deffn

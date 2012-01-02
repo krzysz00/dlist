@@ -1,0 +1,5 @@
+@findex nthdcons
+@anchor{Function nthdcons}
+@deffn {Function} {nthdcons} n dlist @&key from-end
+Returns the @@code@{n@}th dcons in `dlist' (zero-based). If n is @code{>=} the length of the list, returns @code{nil}. If `from-end' is true, returns the @@code@{n@}th dcons from the end.
+@end deffn

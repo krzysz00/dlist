@@ -1,0 +1,5 @@
+@findex mapdcon
+@anchor{Function mapdcon}
+@deffn {Function} {mapdcon} function dlist @&rest more-dlists-and-from-end
+Maps `function' over `dlist' the dconses in `dlist', then returns `dlist'
+@end deffn

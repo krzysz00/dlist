@@ -30,7 +30,7 @@
   prev data next)
 
 (defun dcons (prev data next) 
-  "Constructs a `dcons' with the goven `prev', `data', and `next'"
+  "Constructs a `dcons' with the given `prev', `data', and `next'"
   (make-dcons :prev prev :data data :next next))
 
 (defun next (dcons)

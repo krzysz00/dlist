@@ -1,0 +1,5 @@
+@findex @setf{prev}
+@anchor{Function (setf prev)}
+@deffn {Function} {@setf{prev}} val place
+Sets the `prev' slot of `place' (which must be a `dcons') to `val'
+@end deffn

@@ -1,0 +1,5 @@
+@findex dlist-append
+@anchor{Function dlist-append}
+@deffn {Function} {dlist-append} @&rest dlists
+Appends `dlists' non-derstructively by calling `dlist-nconc' with shallow copies of each dlist.
+@end deffn

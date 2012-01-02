@@ -1,0 +1,5 @@
+@findex dlist
+@anchor{Function dlist}
+@deffn {Function} {dlist} @&rest elements
+Returns a doubly-linked list (dlist) with the elements in `elements'
+@end deffn

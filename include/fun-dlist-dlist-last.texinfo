@@ -1,0 +1,5 @@
+@findex dlist-last
+@anchor{Function dlist-last}
+@deffn {Function} {dlist-last} dlist
+Gets the last `dcons' in a `dlist'
+@end deffn

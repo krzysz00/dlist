@@ -1,0 +1,5 @@
+@findex dlist->list
+@anchor{Function dlist->list}
+@deffn {Function} {dlist->list} dlist
+Converts a dlist to a list
+@end deffn

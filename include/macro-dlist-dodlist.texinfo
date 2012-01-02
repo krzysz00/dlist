@@ -1,0 +1,5 @@
+@findex dodlist
+@anchor{Macro dodlist}
+@deffn {Macro} {dodlist} (var dlist &optional result-form from-end) @&body body
+Loops over the elements in `dlist', binding each to `var' in turn, then executing `body'. If `from-end' is non-nil, the loop proceeds from the end of the list to the begining.
+@end deffn

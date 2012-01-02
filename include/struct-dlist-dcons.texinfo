@@ -1,0 +1,7 @@
+@tindex dcons
+@anchor{Structure dcons}
+@deftp {Structure} {dcons}
+Class precedence list: @code{@lw{dcons}, @lw{structure-object}, @lw{t}}
+
+A three-member cons cell for doubly-linked lists, which has `prev', `data' and `next' slots
+@end deftp

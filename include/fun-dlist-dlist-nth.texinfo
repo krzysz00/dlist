@@ -1,0 +1,5 @@
+@findex dlist-nth
+@anchor{Function dlist-nth}
+@deffn {Function} {dlist-nth} n dlist @&key from-end
+Returns the nth element of `dlist', as the primary value. If n is @code{>=} the length of the list, @code{nil} will be returned. The secondary value will be @code{t} if the value was actually found in the list, and @code{nil} otherwise. If `from-end' is true, `dlist-nth' returns the @@code@{n@}th element from the end, subject to the rules above.
+@end deffn
