@@ -3,7 +3,7 @@ dlist - A Common Lisp library that implements doubly-linked lists
 
 dlist is a Common Lisp library that implements the doubly-linked list
 data structure. dlist provides many operations on doubly-linked lists,
-or dlists, which are documented in the file documentation.html ,which
+or dlists, which are documented in the file documentation.html , which
 is available with the source. If your lisp implementation supports
 [user-extensible sequences][1] (which only SBCL and ABCL do
 currently), you will be able to use the standard Common Lisp sequence
@@ -13,7 +13,7 @@ dependencies other than a common lisp implementation.
 Obtaining and installing dlist
 ------------------------------
 
-dlist is available from [http://github.com/](GitHub) and can be
+dlist is available from [http://github.com/krzysz00/dlist](GitHub) and can be
 installed via Quicklisp (not yet). To use dlist, simply load the ASDF
 system. Use:
 
