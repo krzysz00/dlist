@@ -1,4 +1,4 @@
-dlist - A common lisp library that implements doubly-linked lists
+dlist - A Common Lisp library that implements doubly-linked lists
 =================================================================
 
 dlist is a Common Lisp library that implements the doubly-linked list
