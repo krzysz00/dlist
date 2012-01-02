@@ -6,7 +6,6 @@
   :author "Krzyszxtof Drewniak <krzysdrewniak@gmail.com>"
   :license "3-Clause BSD"
   :description "An implementation of the doubly-linked list in Common Lisp."
-  :depends-on (:iterate)
   :in-order-to ((test-op (test-op #:dlist-test)))
   :serial t
   :components ((:file "package")
@@ -15,7 +14,8 @@
 	       (:file "modification")
 	       (:file "mapping")
 	       (:file "more-ops")
-	       (:file "generic-sequences")))
+	       (:file "generic-sequences")
+	       (:file "iterate")))
 
 (defsystem #:dlist-test
   :depends-on (:dlist :lisp-unit)

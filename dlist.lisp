@@ -3,7 +3,7 @@
 (defclass dlist (#+generic-sequences sequence standard-object)
   ((first :initarg :first :accessor %dlist-first)
    (last :initarg :last :accessor %dlist-last))
-  (:documentation   "A class that represents a doubly-linked list"))
+  (:documentation  "A class that represents a doubly-linked list"))
 
 (defun dlist-first (dlist)
   "Gets the first `dcons' in a `dlist'"

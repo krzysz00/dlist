@@ -27,6 +27,8 @@
    #:dodlist
    #:dodcons
    #:copy-dlist
+   #:in-dlist
+   #:on-dlist
    ))
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
