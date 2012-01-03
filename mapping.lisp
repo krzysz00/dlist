@@ -27,10 +27,10 @@
 
 (defmacro dodcons ((var dlist &optional result-form from-end) &body body)
   "Loops over the dconses in `dlist', binding `var' to each in turn. If `from-end' is non-nil, the loop proceeds from the last element of ther list to the first. This is basically `dolist' for dlists."
-  (let ((dlist-var (gensym)) (from-end-var (gensym)))
-    `(let* ((,dlist-var ,dlist) (,from-end-var ,from-end))
+  (let ((dlist-var (gensym)) (from-end-var (gensym)) (func-var (gensym))
+    `(let* ((,dlist-var ,dlist) (,from-end-var ,from-end) (func-var (if ,from-end-var #'prev #'next)))
        (do ((,var (funcall (if ,from-end-var #'dlist-last #'dlist-first) ,dlist-var) 
-		  (funcall (if ,from-end-var #'prev #'next) ,var)))
+		  (funcall ,func-var ,var)))
 	   ((eql ,var nil) ,result-form)
 	 ,@body))))
 

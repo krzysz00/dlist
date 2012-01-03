@@ -32,17 +32,17 @@
 
 (defun dlist-first (dlist)
   "Gets the first `dcons' in a `dlist'"
-  (cond
-    ((not dlist) nil)
-    ((typep dlist 'dcons) dlist)
-    (t (%dlist-first dlist))))
+  (etypecase dlist
+    (null nil)
+    (dcons dlist)
+    (dlist (%dlist-first dlist))))
 
 (defun dlist-last (dlist)
   "Gets the last `dcons' in a `dlist'"
-  (cond
-    ((not dlist) nil)
-    ((typep dlist 'dcons) (loop for i = dlist then (next dlist) while (next i) finally (return i)))
-    (t (%dlist-last dlist))))
+  (etypecase dlist
+    (null nil)
+    (dcons (loop for i = dlist then (next dlist) while (next i) finally (return i)))
+    (dlist (%dlist-last dlist))))
 
 (defun (setf dlist-first) (val place)
   (setf (%dlist-first place) val))
@@ -95,7 +95,8 @@
 
 (defun dlist->list (dlist)
   "Converts a dlist to a list"
-  (loop for i = (dlist-first dlist) then (next i) while i collect (data i)))
+  (loop for i = (dlist-first dlist) then (next i) 
+     while i collect (data i)))
 
 (defun nthdcons (n dlist &key from-end)
   "Returns the @code{n}th dcons in `dlist' (zero-based). If n is >= the length of the list, returns NIL. If `from-end' is true, returns the @code{n}th dcons from the end."
@@ -118,4 +119,5 @@
 
 (defmethod describe-object ((dlist dlist) stream)
   (let ((*print-circle* t))
-    (format stream "~&~S is a doubly-linked list (dlist) which has the elements ~%~S.~% Its first dcons is: ~%~S~%. Its last dcons is ~%~S~%" dlist (dlist->list dlist) (dlist-first dlist) (dlist-last dlist))))
+    (format stream "~&~S is a doubly-linked list (dlist) which has the elements ~%~S.~% Its first dcons is: ~%~S~%. Its last dcons is ~%~S~%" 
+	    dlist (dlist->list dlist) (dlist-first dlist) (dlist-last dlist))))
