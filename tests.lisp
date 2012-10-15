@@ -174,7 +174,7 @@
 
 ;;Compatibility magic so we can reference lisp-unit macros to run tests
 (defun %run-tests ()
-  (lisp-unit:run-all-tests :dlist))
+  (lisp-unit:run-tests :all :dlist))
 
 (defmethod asdf:perform ((o asdf:test-op) (system (eql (asdf:find-system 'dlist-test))))
   (%run-tests))
